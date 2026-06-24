@@ -1,0 +1,74 @@
+name: LinkCompass
+options:
+  bundleIdPrefix: com.reidchatham
+  deploymentTarget:
+    macOS: "13.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    CODE_SIGN_STYLE: Automatic
+targets:
+  LinkCompassCore:
+    type: framework
+    platform: macOS
+    sources:
+      - Sources/LinkCompassCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompassCore
+        GENERATE_INFOPLIST_FILE: YES
+  LinkCompass:
+    type: application
+    platform: macOS
+    sources:
+      - Sources/LinkCompass
+    dependencies:
+      - target: LinkCompassCore
+    settings:
+      base:
+        INFOPLIST_FILE: Sources/LinkCompass/Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompass
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+  LinkCompassCoreTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - Tests/LinkCompassCoreTests
+    dependencies:
+      - target: LinkCompassCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompassCoreTests
+        GENERATE_INFOPLIST_FILE: YES
+  LinkCompassUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - Tests/LinkCompassUITests
+    dependencies:
+      - target: LinkCompass
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompassUITests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  LinkCompass:
+    build:
+      targets:
+        LinkCompass: all
+        LinkCompassCoreTests: [test]
+    test:
+      targets:
+        - LinkCompassCoreTests
+      gatherCoverageData: false
+  LinkCompassUITests:
+    build:
+      targets:
+        LinkCompass: all
+        LinkCompassUITests: [test]
+    test:
+      targets:
+        - LinkCompassUITests
+      gatherCoverageData: false
