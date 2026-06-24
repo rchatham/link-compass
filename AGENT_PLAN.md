@@ -11,7 +11,7 @@ Working name: **LinkCompass**
 Repo path:
 
 ```text
-/Users/reidchatham/Developer/link-compass
+link-compass
 ```
 
 ## Product goals

@@ -78,6 +78,17 @@ scripts/smoke-test.sh
 - Optional per-domain remember toggle.
 - Optional auto-open for explicit remembered domain rules.
 
+## Known limitations
+
+- This is an early MVP scaffold, not a notarized public release build.
+- Local development builds may not appear in macOS Default Browser settings even when Launch Services recognizes them.
+- Use the onboarding **Set Automatically** button to set LinkCompass as the `http`/`https` handler during development.
+- Public distribution should use a Developer ID signed, notarized, and stapled app bundle.
+
 ## Privacy note
 
 LinkCompass passes the full URL only to the selected browser. Preferences persist normalized domains and browser bundle identifiers; full URLs, paths, and query strings are not stored.
+
+## License
+
+MIT. See [`LICENSE`](./LICENSE).
