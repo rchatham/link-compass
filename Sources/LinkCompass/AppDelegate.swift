@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func handleIncomingURL(_ url: URL) {
-        guard let host = URLNormalizer.normalizedHost(from: url) else {
+        guard let context = IncomingURLContext(url: url) else {
             showAlert(message: "Unsupported URL", informativeText: url.absoluteString)
             return
         }
@@ -44,36 +44,39 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        if ruleStore.autoOpenKnownHosts,
-           let domainRuleBundleIdentifier = ruleStore.domainRuleBrowserBundleIdentifier(forHost: host),
+        if context.supportsDomainRules,
+           ruleStore.autoOpenKnownHosts,
+           let rememberHost = context.rememberHost,
+           let domainRuleBundleIdentifier = ruleStore.domainRuleBrowserBundleIdentifier(forHost: rememberHost),
            let browser = browsers.first(where: { $0.bundleIdentifier == domainRuleBundleIdentifier }) {
             open(url: url, in: browser)
             return
         }
 
-        let preferredBundleIdentifier = ruleStore.preferredBrowserBundleIdentifier(forHost: host)
-        let initialSelection = preferredBundleIdentifier ?? browsers.first?.bundleIdentifier
+        let preferredBundleIdentifier = context.rememberHost.flatMap { ruleStore.preferredBrowserBundleIdentifier(forHost: $0) }
+        let initialSelection = preferredBundleIdentifier ?? ruleStore.globalDefaultBrowserBundleIdentifier ?? browsers.first?.bundleIdentifier
 
         chooserWindowController.show(
             url: url,
-            host: host,
+            displayTitle: context.displayTitle,
+            rememberLabel: context.rememberHost,
             browsers: browsers,
             initialSelection: initialSelection,
             onChoose: { [weak self] browser, remember in
-                self?.handleChoice(url: url, host: host, browser: browser, remember: remember)
+                self?.handleChoice(url: url, rememberHost: context.rememberHost, browser: browser, remember: remember)
             },
             onCancel: {}
         )
     }
 
-    private func handleChoice(url: URL, host: String, browser: Browser, remember: Bool) {
+    private func handleChoice(url: URL, rememberHost: String?, browser: Browser, remember: Bool) {
         if ruleStore.globalDefaultBrowserBundleIdentifier == nil {
             ruleStore.globalDefaultBrowserBundleIdentifier = browser.bundleIdentifier
         }
 
-        if remember {
+        if remember, let rememberHost {
             do {
-                try ruleStore.recordChoice(host: host, browserBundleIdentifier: browser.bundleIdentifier)
+                try ruleStore.recordChoice(host: rememberHost, browserBundleIdentifier: browser.bundleIdentifier)
             } catch {
                 showAlert(message: "Could not save browser preference", informativeText: error.localizedDescription)
             }

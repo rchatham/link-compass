@@ -4,7 +4,8 @@ import LinkCompassCore
 
 struct ChooserView: View {
     let url: URL
-    let host: String
+    let displayTitle: String
+    let rememberLabel: String?
     let browsers: [Browser]
     let initialSelection: String?
     let onChoose: (Browser, Bool) -> Void
@@ -19,7 +20,7 @@ struct ChooserView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Open link with…")
                     .font(.headline)
-                Text(host)
+                Text(displayTitle)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Text(url.absoluteString)
@@ -35,8 +36,10 @@ struct ChooserView: View {
                 }
             }
 
-            Toggle("Remember this choice for \(host)", isOn: $rememberChoice)
-                .font(.caption)
+            if let rememberLabel {
+                Toggle("Remember this choice for \(rememberLabel)", isOn: $rememberChoice)
+                    .font(.caption)
+            }
 
             HStack {
                 Text("Enter opens • Esc cancels • ↑/↓ selects • 1–9 opens")

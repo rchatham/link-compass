@@ -8,7 +8,8 @@ final class ChooserWindowController {
 
     func show(
         url: URL,
-        host: String,
+        displayTitle: String,
+        rememberLabel: String?,
         browsers: [Browser],
         initialSelection: String?,
         onChoose: @escaping (Browser, Bool) -> Void,
@@ -18,7 +19,8 @@ final class ChooserWindowController {
 
         let rootView = ChooserView(
             url: url,
-            host: host,
+            displayTitle: displayTitle,
+            rememberLabel: rememberLabel,
             browsers: browsers,
             initialSelection: initialSelection,
             onChoose: { [weak self] browser, remember in

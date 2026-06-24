@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5746529F702F30A431AA15 /* IncomingURLContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */; };
 		18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472016026DB9F96C82982F4E /* ChooserWindowController.swift */; };
 		24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613678E9E1E096950DA7D8FF /* OnboardingView.swift */; };
 		343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */; };
@@ -20,6 +21,7 @@
 		525A48C31DB7FA00B59CFCBD /* ChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7CF479076989F425F3B16 /* ChooserView.swift */; };
 		53C84D30887D08D5E291A2F4 /* LinkOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */; };
 		68D4B6CD69E76494EAC024D7 /* LinkCompassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */; };
+		78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */; };
 		851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */; };
 		94319BAC4EA4F53F7F5A956A /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19794150DB7C5B08D60D0232 /* StatusItemController.swift */; };
 		99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */; };
@@ -101,9 +103,11 @@
 		76B7C035161B0195A96BC548 /* RuleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStore.swift; sourceTree = "<group>"; };
 		7B84A92A913132A7C38C033B /* LinkCompassCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinkCompassCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionStateTests.swift; sourceTree = "<group>"; };
+		9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContextTests.swift; sourceTree = "<group>"; };
 		94C425F4E3E92B7003D722F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOpener.swift; sourceTree = "<group>"; };
 		AFC2C124FB813B454E4E0B8D /* LinkCompassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkCompassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContext.swift; sourceTree = "<group>"; };
 		B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStoreTests.swift; sourceTree = "<group>"; };
 		CCF991C86D494E34DC3F2385 /* LinkCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionState.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */,
+				9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */,
 				B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */,
 				5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */,
 			);
@@ -209,6 +214,7 @@
 				DE94B071772EF07E7E9B1676 /* Browser.swift */,
 				0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */,
 				D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */,
+				B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */,
 				2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */,
 				76B7C035161B0195A96BC548 /* RuleStore.swift */,
 				36F72432AE6D9514CA75971B /* URLNormalizer.swift */,
@@ -357,6 +363,7 @@
 				3E9D1B8DA09F5CE60C3797A7 /* Browser.swift in Sources */,
 				A3618F1795F38AE802D97E6F /* BrowserChoiceRule.swift in Sources */,
 				CF6ACDCC394752811191BBB0 /* ChooserSelectionState.swift in Sources */,
+				0A5746529F702F30A431AA15 /* IncomingURLContext.swift in Sources */,
 				C3EB8046C850334964341DD9 /* PreferencesStore.swift in Sources */,
 				4D07E42A0AB6CB88820B70C8 /* RuleStore.swift in Sources */,
 				408797A2C9671C6EF25110E4 /* URLNormalizer.swift in Sources */,
@@ -393,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */,
+				78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */,
 				D40E501A44A9C10686BF5E5E /* RuleStoreTests.swift in Sources */,
 				851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */,
 			);
