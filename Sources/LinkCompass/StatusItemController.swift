@@ -3,8 +3,10 @@ import AppKit
 @MainActor
 final class StatusItemController {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    private let onOpenOnboarding: () -> Void
 
-    init() {
+    init(onOpenOnboarding: @escaping () -> Void) {
+        self.onOpenOnboarding = onOpenOnboarding
         configure()
     }
 
@@ -15,11 +17,16 @@ final class StatusItemController {
         }
 
         let menu = NSMenu()
+        menu.addItem(NSMenuItem(title: "Open LinkCompass…", action: #selector(openOnboarding), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Open LinkCompass Settings…", action: #selector(openSettings), keyEquivalent: ","))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit LinkCompass", action: #selector(quit), keyEquivalent: "q"))
         menu.items.forEach { $0.target = self }
         statusItem.menu = menu
+    }
+
+    @objc private func openOnboarding() {
+        onOpenOnboarding()
     }
 
     @objc private func openSettings() {

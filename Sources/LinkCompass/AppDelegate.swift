@@ -6,9 +6,12 @@ import LinkCompassCore
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let browserDetector = BrowserDetector()
     private let chooserWindowController = ChooserWindowController()
+    private let onboardingWindowController = OnboardingWindowController()
     private let linkOpener = LinkOpener()
     private let ruleStore: RuleStore
     private var statusItemController: StatusItemController?
+    private var pendingOnboardingLaunch: DispatchWorkItem?
+    private var hasHandledIncomingURL = false
 
     override init() {
         do {
@@ -22,12 +25,38 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
-        statusItemController = StatusItemController()
-        NSApp.activate(ignoringOtherApps: true)
+        statusItemController = StatusItemController(onOpenOnboarding: { [weak self] in
+            self?.showOnboarding()
+        })
+        scheduleOnboardingForNormalLaunch()
+    }
+
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if !flag {
+            showOnboarding()
+        }
+        return true
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
+        hasHandledIncomingURL = true
+        pendingOnboardingLaunch?.cancel()
+        onboardingWindowController.close()
         urls.forEach { handleIncomingURL($0) }
+    }
+
+    private func scheduleOnboardingForNormalLaunch() {
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self, !self.hasHandledIncomingURL else { return }
+            self.showOnboarding()
+        }
+        pendingOnboardingLaunch = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: workItem)
+    }
+
+    private func showOnboarding() {
+        NSApp.setActivationPolicy(.regular)
+        onboardingWindowController.show()
     }
 
     private func handleIncomingURL(_ url: URL) {
