@@ -24,7 +24,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.setActivationPolicy(.regular)
+        NSApp.setActivationPolicy(.accessory)
         statusItemController = StatusItemController(onOpenOnboarding: { [weak self] in
             self?.showOnboarding()
         })
@@ -55,7 +55,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func showOnboarding() {
-        NSApp.setActivationPolicy(.regular)
         onboardingWindowController.show()
     }
 
