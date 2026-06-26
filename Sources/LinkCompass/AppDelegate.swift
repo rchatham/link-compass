@@ -117,10 +117,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         linkOpener.open(url, in: browser) { [weak self] error in
             if let error {
                 self?.showAlert(message: "Could not open link", informativeText: error.localizedDescription)
-                return
             }
-
-            NSApp.terminate(nil)
         }
     }
 

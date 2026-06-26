@@ -12,6 +12,7 @@
 		18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472016026DB9F96C82982F4E /* ChooserWindowController.swift */; };
 		24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613678E9E1E096950DA7D8FF /* OnboardingView.swift */; };
 		343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */; };
+		34804629C4C714920F10DA87 /* BrowserWindowOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */; };
 		36AC15CA275D2E4A24A2960A /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		3D37B7C562B8DAC9A3D76DCB /* BrowserDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420432F03204156D3E708288 /* BrowserDetector.swift */; };
 		3E9D1B8DA09F5CE60C3797A7 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94B071772EF07E7E9B1676 /* Browser.swift */; };
@@ -104,6 +105,7 @@
 		75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCompassApp.swift; sourceTree = "<group>"; };
 		76B7C035161B0195A96BC548 /* RuleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStore.swift; sourceTree = "<group>"; };
 		7B84A92A913132A7C38C033B /* LinkCompassCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinkCompassCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserWindowOpener.swift; sourceTree = "<group>"; };
 		8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionStateTests.swift; sourceTree = "<group>"; };
 		9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContextTests.swift; sourceTree = "<group>"; };
 		94C425F4E3E92B7003D722F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */,
 				420432F03204156D3E708288 /* BrowserDetector.swift */,
+				81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */,
 				49F7CF479076989F425F3B16 /* ChooserView.swift */,
 				472016026DB9F96C82982F4E /* ChooserWindowController.swift */,
 				3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */,
@@ -387,6 +390,7 @@
 			files = (
 				99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */,
 				3D37B7C562B8DAC9A3D76DCB /* BrowserDetector.swift in Sources */,
+				34804629C4C714920F10DA87 /* BrowserWindowOpener.swift in Sources */,
 				525A48C31DB7FA00B59CFCBD /* ChooserView.swift in Sources */,
 				18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */,
 				9F2DC055BE52DF6392722F6E /* DefaultBrowserManager.swift in Sources */,
