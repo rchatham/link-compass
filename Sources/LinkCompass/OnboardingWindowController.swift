@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 @MainActor
-final class OnboardingWindowController {
+final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private var window: NSWindow?
 
     func show() {
@@ -21,6 +21,9 @@ final class OnboardingWindowController {
         )
         window.title = "LinkCompass"
         window.contentView = hostingView
+        window.isReleasedWhenClosed = false
+        window.isRestorable = false
+        window.delegate = self
         window.center()
         window.setFrameAutosaveName("LinkCompassOnboarding")
         window.makeKeyAndOrderFront(nil)
@@ -30,7 +33,13 @@ final class OnboardingWindowController {
     }
 
     func close() {
-        window?.close()
+        guard let window else { return }
+        window.orderOut(nil)
+        self.window = nil
+    }
+
+    func windowWillClose(_ notification: Notification) {
+        guard notification.object as? NSWindow === window else { return }
         window = nil
     }
 }
