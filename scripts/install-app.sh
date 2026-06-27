@@ -43,8 +43,9 @@ fi
 "$LSREGISTER" -f -R "$TARGET_APP"
 
 open -R "$TARGET_APP"
+open "$TARGET_APP"
 
-echo "Installed and registered $TARGET_APP"
+echo "Installed, registered, and launched $TARGET_APP"
 echo "Signing details:"
 codesign -dv "$TARGET_APP" 2>&1 | sed 's/^/  /'
 echo "Gatekeeper assessment:"

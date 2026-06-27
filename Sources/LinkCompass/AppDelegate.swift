@@ -24,6 +24,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        ProcessInfo.processInfo.disableAutomaticTermination("LinkCompass keeps a menu bar item available for browser routing.")
         NSApp.setActivationPolicy(.accessory)
         statusItemController = StatusItemController(onOpenOnboarding: { [weak self] in
             self?.showOnboarding()
