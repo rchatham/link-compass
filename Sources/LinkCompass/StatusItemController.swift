@@ -15,12 +15,8 @@ final class StatusItemController {
 
     private func configure() {
         if let button = statusItem.button {
-            if let image = NSImage(systemSymbolName: "location.north.circle.fill", accessibilityDescription: "LinkCompass") {
-                image.isTemplate = true
-                button.image = image
-            } else {
-                button.title = "LC"
-            }
+            button.image = nil
+            button.title = "🧭"
             button.toolTip = "LinkCompass"
         }
 

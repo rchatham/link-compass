@@ -32,6 +32,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         scheduleOnboardingForNormalLaunch()
     }
 
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        false
+    }
+
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if !flag {
             showOnboarding()
@@ -118,7 +122,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         linkOpener.open(url, in: browser) { [weak self] error in
             if let error {
                 self?.showAlert(message: "Could not open link", informativeText: error.localizedDescription)
+                return
             }
+
+            self?.closeLinkCompassWindows()
+        }
+    }
+
+    private func closeLinkCompassWindows() {
+        chooserWindowController.close()
+        onboardingWindowController.close()
+        NSApp.windows.forEach { window in
+            window.orderOut(nil)
         }
     }
 
