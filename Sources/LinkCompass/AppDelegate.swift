@@ -9,7 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let onboardingWindowController = OnboardingWindowController()
     private let linkOpener = LinkOpener()
     private let ruleStore: RuleStore
-    private var statusItemController: StatusItemController?
+    private var openOnboardingObserver: NSObjectProtocol?
     private var pendingOnboardingLaunch: DispatchWorkItem?
     private var hasHandledIncomingURL = false
 
@@ -26,10 +26,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         ProcessInfo.processInfo.disableAutomaticTermination("LinkCompass keeps a menu bar item available for browser routing.")
         NSApp.setActivationPolicy(.accessory)
-        statusItemController = StatusItemController(onOpenOnboarding: { [weak self] in
-            self?.showOnboarding()
-        })
+        openOnboardingObserver = NotificationCenter.default.addObserver(
+            forName: .linkCompassOpenOnboarding,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                self?.showOnboarding()
+            }
+        }
         scheduleOnboardingForNormalLaunch()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        if let openOnboardingObserver {
+            NotificationCenter.default.removeObserver(openOnboardingObserver)
+        }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

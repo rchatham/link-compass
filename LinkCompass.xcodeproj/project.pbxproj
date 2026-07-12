@@ -11,6 +11,7 @@
 		153C1E2BAF50F0B7B4E4623E /* OnboardingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */; };
 		18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472016026DB9F96C82982F4E /* ChooserWindowController.swift */; };
 		24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613678E9E1E096950DA7D8FF /* OnboardingView.swift */; };
+		32947D7EC1C6CA057F8BF86D /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */; };
 		343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */; };
 		34804629C4C714920F10DA87 /* BrowserWindowOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */; };
 		36AC15CA275D2E4A24A2960A /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
@@ -116,6 +117,7 @@
 		CCF991C86D494E34DC3F2385 /* LinkCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionState.swift; sourceTree = "<group>"; };
 		DE94B071772EF07E7E9B1676 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
+		F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */,
 				75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */,
 				A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */,
+				F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */,
 				613678E9E1E096950DA7D8FF /* OnboardingView.swift */,
 				6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */,
 				53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */,
@@ -396,6 +399,7 @@
 				9F2DC055BE52DF6392722F6E /* DefaultBrowserManager.swift in Sources */,
 				68D4B6CD69E76494EAC024D7 /* LinkCompassApp.swift in Sources */,
 				53C84D30887D08D5E291A2F4 /* LinkOpener.swift in Sources */,
+				32947D7EC1C6CA057F8BF86D /* MenuBarView.swift in Sources */,
 				24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */,
 				153C1E2BAF50F0B7B4E4623E /* OnboardingWindowController.swift in Sources */,
 				D4804634F67B6AE404FCB862 /* PreferencesView.swift in Sources */,
