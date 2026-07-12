@@ -3,7 +3,7 @@ import LinkCompassCore
 
 @MainActor
 final class StatusItemController {
-    private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let browserDetector = BrowserDetector()
     private let browserWindowOpener = BrowserWindowOpener()
     private let onOpenOnboarding: () -> Void
@@ -14,9 +14,11 @@ final class StatusItemController {
     }
 
     private func configure() {
+        statusItem.isVisible = true
+
         if let button = statusItem.button {
             button.image = nil
-            button.title = "🧭"
+            button.title = "LinkCompass"
             button.toolTip = "LinkCompass"
         }
 
