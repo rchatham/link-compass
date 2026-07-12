@@ -5,13 +5,8 @@ struct LinkCompassApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("LC", systemImage: "location.north.circle.fill") {
+        MenuBarExtra("LC") {
             MenuBarView()
-        }
-        .menuBarExtraStyle(.menu)
-
-        Settings {
-            PreferencesView()
         }
     }
 }

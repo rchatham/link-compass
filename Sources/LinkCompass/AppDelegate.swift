@@ -24,7 +24,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        ProcessInfo.processInfo.disableAutomaticTermination("LinkCompass keeps a menu bar item available for browser routing.")
         openOnboardingObserver = NotificationCenter.default.addObserver(
             forName: .linkCompassOpenOnboarding,
             object: nil,

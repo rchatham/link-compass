@@ -26,7 +26,6 @@
 		68D4B6CD69E76494EAC024D7 /* LinkCompassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */; };
 		78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */; };
 		851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */; };
-		94319BAC4EA4F53F7F5A956A /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19794150DB7C5B08D60D0232 /* StatusItemController.swift */; };
 		99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */; };
 		9F2DC055BE52DF6392722F6E /* DefaultBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */; };
 		A3618F1795F38AE802D97E6F /* BrowserChoiceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */; };
@@ -89,7 +88,6 @@
 
 /* Begin PBXFileReference section */
 		0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserChoiceRule.swift; sourceTree = "<group>"; };
-		19794150DB7C5B08D60D0232 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
 		2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesStore.swift; sourceTree = "<group>"; };
 		36F72432AE6D9514CA75971B /* URLNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNormalizer.swift; sourceTree = "<group>"; };
 		3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBrowserManager.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				613678E9E1E096950DA7D8FF /* OnboardingView.swift */,
 				6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */,
 				53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */,
-				19794150DB7C5B08D60D0232 /* StatusItemController.swift */,
 				C99CCD93E026ECC93A98564F /* Resources */,
 			);
 			path = LinkCompass;
@@ -403,7 +400,6 @@
 				24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */,
 				153C1E2BAF50F0B7B4E4623E /* OnboardingWindowController.swift in Sources */,
 				D4804634F67B6AE404FCB862 /* PreferencesView.swift in Sources */,
-				94319BAC4EA4F53F7F5A956A /* StatusItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

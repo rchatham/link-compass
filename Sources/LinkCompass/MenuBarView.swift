@@ -10,14 +10,6 @@ struct MenuBarView: View {
             NotificationCenter.default.post(name: .linkCompassOpenOnboarding, object: nil)
         }
 
-        Button("Open LinkCompass Settings…") {
-            NSApp.activate(ignoringOtherApps: true)
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        }
-        .keyboardShortcut(",")
-
-        Divider()
-
         Menu("Open Blank Window") {
             let browsers = browserDetector.installedBrowsers()
             if browsers.isEmpty {
