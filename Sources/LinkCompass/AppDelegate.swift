@@ -9,6 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let onboardingWindowController = OnboardingWindowController()
     private let linkOpener = LinkOpener()
     private let ruleStore: RuleStore
+    private var fallbackStatusItem: NSStatusItem?
     private var openOnboardingObserver: NSObjectProtocol?
     private var pendingOnboardingLaunch: DispatchWorkItem?
     private var hasHandledIncomingURL = false
@@ -24,6 +25,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        ProcessInfo.processInfo.disableAutomaticTermination("LinkCompass keeps a menu bar item available for browser routing.")
+        configureFallbackStatusItem()
         openOnboardingObserver = NotificationCenter.default.addObserver(
             forName: .linkCompassOpenOnboarding,
             object: nil,
@@ -44,6 +47,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
+    }
+
+    private func configureFallbackStatusItem() {
+        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem.isVisible = true
+
+        if let button = statusItem.button {
+            button.title = "LC2"
+            button.toolTip = "LinkCompass"
+        }
+
+        let menu = NSMenu()
+        menu.addItem(NSMenuItem(title: "Open LinkCompass…", action: #selector(openOnboardingFromMenu), keyEquivalent: ""))
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "Quit LinkCompass", action: #selector(quitFromMenu), keyEquivalent: "q"))
+        menu.items.forEach { $0.target = self }
+        statusItem.menu = menu
+
+        fallbackStatusItem = statusItem
+    }
+
+    @objc private func openOnboardingFromMenu() {
+        showOnboarding()
+    }
+
+    @objc private func quitFromMenu() {
+        NSApp.terminate(nil)
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
