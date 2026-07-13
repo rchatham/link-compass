@@ -5,7 +5,7 @@ struct LinkCompassApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("LC") {
+        MenuBarExtra("LinkCompass", systemImage: "safari") {
             MenuBarView()
         }
     }

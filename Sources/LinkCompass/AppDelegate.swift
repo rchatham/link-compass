@@ -50,11 +50,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func configureFallbackStatusItem() {
-        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.isVisible = true
 
         if let button = statusItem.button {
-            button.title = "LC2"
+            button.title = ""
+            button.image = NSImage(systemSymbolName: "safari", accessibilityDescription: "LinkCompass")
+            button.image?.isTemplate = true
             button.toolTip = "LinkCompass"
         }
 
