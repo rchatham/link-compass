@@ -27,6 +27,14 @@ public final class RuleStore: @unchecked Sendable {
         }
     }
 
+    public var learningEnabled: Bool {
+        get { preferences.learningEnabled }
+        set {
+            preferences.learningEnabled = newValue
+            saveIgnoringErrors()
+        }
+    }
+
     public func domainRuleBrowserBundleIdentifier(forHost host: String) -> String? {
         let normalized = normalizeStoredHost(host)
         return preferences.rules.first { rule in

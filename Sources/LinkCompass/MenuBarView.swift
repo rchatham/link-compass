@@ -10,6 +10,10 @@ struct MenuBarView: View {
             NotificationCenter.default.post(name: .linkCompassOpenOnboarding, object: nil)
         }
 
+        Button("About LinkCompass…") {
+            NotificationCenter.default.post(name: .linkCompassOpenAbout, object: nil)
+        }
+
         Menu("Open Blank Window") {
             let browsers = browserDetector.installedBrowsers()
             if browsers.isEmpty {
@@ -34,4 +38,5 @@ struct MenuBarView: View {
 
 extension Notification.Name {
     static let linkCompassOpenOnboarding = Notification.Name("LinkCompassOpenOnboarding")
+    static let linkCompassOpenAbout = Notification.Name("LinkCompassOpenAbout")
 }

@@ -30,6 +30,34 @@ final class RuleStoreTests: XCTestCase {
         XCTAssertTrue(reloadedStore.autoOpenKnownHosts)
     }
 
+    func testPersistsLearningEnabledSetting() throws {
+        let persistence = InMemoryPreferencesStore()
+        let store = RuleStore(persistence: persistence)
+
+        XCTAssertFalse(store.learningEnabled)
+        store.learningEnabled = true
+
+        let reloadedStore = RuleStore(persistence: persistence)
+        XCTAssertTrue(reloadedStore.learningEnabled)
+    }
+
+    func testDecodesLegacyPreferencesWithoutLearningEnabled() throws {
+        let json = """
+        {
+          "autoOpenKnownHosts": true,
+          "globalDefaultBrowserBundleIdentifier": "com.apple.Safari",
+          "rules": []
+        }
+        """.data(using: .utf8)!
+
+        let preferences = try JSONDecoder.linkCompass.decode(LinkCompassPreferences.self, from: json)
+
+        XCTAssertTrue(preferences.autoOpenKnownHosts)
+        XCTAssertEqual(preferences.globalDefaultBrowserBundleIdentifier, "com.apple.Safari")
+        XCTAssertFalse(preferences.learningEnabled)
+        XCTAssertEqual(preferences.rules, [])
+    }
+
     func testDeletesDomainRule() throws {
         let persistence = InMemoryPreferencesStore()
         let store = RuleStore(persistence: persistence)

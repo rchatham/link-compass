@@ -28,15 +28,26 @@ public struct BrowserChoiceRule: Codable, Equatable, Identifiable, Sendable {
 public struct LinkCompassPreferences: Codable, Equatable, Sendable {
     public var globalDefaultBrowserBundleIdentifier: String?
     public var autoOpenKnownHosts: Bool
+    public var learningEnabled: Bool
     public var rules: [BrowserChoiceRule]
 
     public init(
         globalDefaultBrowserBundleIdentifier: String? = nil,
         autoOpenKnownHosts: Bool = false,
+        learningEnabled: Bool = false,
         rules: [BrowserChoiceRule] = []
     ) {
         self.globalDefaultBrowserBundleIdentifier = globalDefaultBrowserBundleIdentifier
         self.autoOpenKnownHosts = autoOpenKnownHosts
+        self.learningEnabled = learningEnabled
         self.rules = rules
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        globalDefaultBrowserBundleIdentifier = try container.decodeIfPresent(String.self, forKey: .globalDefaultBrowserBundleIdentifier)
+        autoOpenKnownHosts = try container.decodeIfPresent(Bool.self, forKey: .autoOpenKnownHosts) ?? false
+        learningEnabled = try container.decodeIfPresent(Bool.self, forKey: .learningEnabled) ?? false
+        rules = try container.decodeIfPresent([BrowserChoiceRule].self, forKey: .rules) ?? []
     }
 }

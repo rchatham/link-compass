@@ -34,6 +34,30 @@ struct PreferencesView: View {
                 .padding(.vertical, 4)
             }
 
+            GroupBox("Private learning") {
+                VStack(alignment: .leading, spacing: 12) {
+                    Toggle("Collect local choice history for future smart suggestions", isOn: $viewModel.learningEnabled)
+                        .onChange(of: viewModel.learningEnabled) { newValue in
+                            viewModel.setLearningEnabled(newValue)
+                        }
+
+                    Text("Choice history is opt-in, stored only on this Mac, and records domains only — never full URLs, paths, queries, or fragments.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    HStack {
+                        Text("Stored choice events: \(viewModel.eventCount)")
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Delete Learning Data", role: .destructive) {
+                            viewModel.deleteLearningData()
+                        }
+                        .disabled(viewModel.eventCount == 0)
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+
             GroupBox("Remembered domains") {
                 if viewModel.rules.isEmpty {
                     Text("No domain rules yet. Use the chooser's remember option to add one.")
@@ -76,7 +100,7 @@ struct PreferencesView: View {
             }
         }
         .padding(20)
-        .frame(width: 680, height: 520)
+        .frame(width: 680, height: 640)
         .onAppear { viewModel.reload() }
     }
 }
@@ -87,10 +111,13 @@ final class PreferencesViewModel: ObservableObject {
     @Published var rules: [BrowserChoiceRule] = []
     @Published var globalDefaultBrowserBundleIdentifier: String?
     @Published var autoOpenKnownHosts = false
+    @Published var learningEnabled = false
+    @Published var eventCount = 0
     @Published var errorMessage: String?
 
     private let browserDetector = BrowserDetector()
     private var ruleStore: RuleStore?
+    private var eventStore: EventStore?
 
     init() {
         reload()
@@ -99,12 +126,16 @@ final class PreferencesViewModel: ObservableObject {
     func reload() {
         do {
             let store = RuleStore(persistence: try JSONPreferencesStore())
+            let events = EventStore(persistence: try JSONEventStore())
             store.reload()
             ruleStore = store
+            eventStore = events
             browsers = browserDetector.installedBrowsers()
             let preferences = store.currentPreferences
             globalDefaultBrowserBundleIdentifier = preferences.globalDefaultBrowserBundleIdentifier
             autoOpenKnownHosts = preferences.autoOpenKnownHosts
+            learningEnabled = preferences.learningEnabled
+            eventCount = try events.events().count
             rules = preferences.rules.sorted { $0.hostPattern < $1.hostPattern }
             errorMessage = nil
         } catch {
@@ -120,6 +151,20 @@ final class PreferencesViewModel: ObservableObject {
     func setAutoOpenKnownHosts(_ enabled: Bool) {
         ruleStore?.autoOpenKnownHosts = enabled
         reload()
+    }
+
+    func setLearningEnabled(_ enabled: Bool) {
+        ruleStore?.learningEnabled = enabled
+        reload()
+    }
+
+    func deleteLearningData() {
+        do {
+            try eventStore?.deleteAll()
+            reload()
+        } catch {
+            errorMessage = "Could not delete learning data: \(error.localizedDescription)"
+        }
     }
 
     func deleteRule(id: UUID) {

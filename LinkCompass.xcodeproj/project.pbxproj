@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A5746529F702F30A431AA15 /* IncomingURLContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */; };
 		153C1E2BAF50F0B7B4E4623E /* OnboardingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */; };
+		166FB47E03A37C11FC9F5F2D /* BrowserRankerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6B3C78F2275389598F8B7 /* BrowserRankerTests.swift */; };
 		18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472016026DB9F96C82982F4E /* ChooserWindowController.swift */; };
 		24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613678E9E1E096950DA7D8FF /* OnboardingView.swift */; };
 		32947D7EC1C6CA057F8BF86D /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */; };
@@ -17,20 +18,26 @@
 		36AC15CA275D2E4A24A2960A /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		3D37B7C562B8DAC9A3D76DCB /* BrowserDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420432F03204156D3E708288 /* BrowserDetector.swift */; };
 		3E9D1B8DA09F5CE60C3797A7 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94B071772EF07E7E9B1676 /* Browser.swift */; };
+		3F42925D781488B754E609F0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C965659A339AF2486D8E5 /* AboutView.swift */; };
 		3F590C4C2D526FC623A53649 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA01C01953CB42EC48BA2A /* OnboardingUITests.swift */; };
 		408797A2C9671C6EF25110E4 /* URLNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F72432AE6D9514CA75971B /* URLNormalizer.swift */; };
+		48169E5E29462DC2185DA084 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62417969909104B3961B1C82 /* AboutWindowController.swift */; };
 		49DF2D41F8CD1CB36B1A1E1D /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		4D07E42A0AB6CB88820B70C8 /* RuleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7C035161B0195A96BC548 /* RuleStore.swift */; };
 		525A48C31DB7FA00B59CFCBD /* ChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7CF479076989F425F3B16 /* ChooserView.swift */; };
 		53C84D30887D08D5E291A2F4 /* LinkOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */; };
+		683BBBCE9B9C1F108DEF92E8 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09153C4D79486BB533DFF3E5 /* EventStore.swift */; };
 		68D4B6CD69E76494EAC024D7 /* LinkCompassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */; };
 		78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */; };
 		851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */; };
 		99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */; };
+		9BCB717585F9494A7BD702D6 /* BrowserRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627815C49F6492A7E5C464D /* BrowserRanker.swift */; };
 		9F2DC055BE52DF6392722F6E /* DefaultBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */; };
 		A3618F1795F38AE802D97E6F /* BrowserChoiceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */; };
+		B93A77289CF0BDB272CDF5C9 /* EventStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22189CE8D1353E29C7D30887 /* EventStoreTests.swift */; };
 		C3EB8046C850334964341DD9 /* PreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */; };
 		C91A939DD0B8EB9B3A519E27 /* LinkCompassCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CA66FDD210B23032064AA65F /* ChoiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB7600ADB281508BA0FD18 /* ChoiceEvent.swift */; };
 		CF6ACDCC394752811191BBB0 /* ChooserSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */; };
 		D40E501A44A9C10686BF5E5E /* RuleStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */; };
 		D4804634F67B6AE404FCB862 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */; };
@@ -87,7 +94,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		09153C4D79486BB533DFF3E5 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserChoiceRule.swift; sourceTree = "<group>"; };
+		22189CE8D1353E29C7D30887 /* EventStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStoreTests.swift; sourceTree = "<group>"; };
+		23CB7600ADB281508BA0FD18 /* ChoiceEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceEvent.swift; sourceTree = "<group>"; };
 		2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesStore.swift; sourceTree = "<group>"; };
 		36F72432AE6D9514CA75971B /* URLNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNormalizer.swift; sourceTree = "<group>"; };
 		3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBrowserManager.swift; sourceTree = "<group>"; };
@@ -98,6 +108,7 @@
 		5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNormalizerTests.swift; sourceTree = "<group>"; };
 		53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		613678E9E1E096950DA7D8FF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		62417969909104B3961B1C82 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindowController.swift; sourceTree = "<group>"; };
 		6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EDA01C01953CB42EC48BA2A /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
@@ -108,10 +119,13 @@
 		8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionStateTests.swift; sourceTree = "<group>"; };
 		9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContextTests.swift; sourceTree = "<group>"; };
 		94C425F4E3E92B7003D722F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9C2C965659A339AF2486D8E5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOpener.swift; sourceTree = "<group>"; };
 		AFC2C124FB813B454E4E0B8D /* LinkCompassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkCompassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContext.swift; sourceTree = "<group>"; };
+		B627815C49F6492A7E5C464D /* BrowserRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserRanker.swift; sourceTree = "<group>"; };
 		B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStoreTests.swift; sourceTree = "<group>"; };
+		C7D6B3C78F2275389598F8B7 /* BrowserRankerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserRankerTests.swift; sourceTree = "<group>"; };
 		CCF991C86D494E34DC3F2385 /* LinkCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionState.swift; sourceTree = "<group>"; };
 		DE94B071772EF07E7E9B1676 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
@@ -159,6 +173,8 @@
 		422974A57BEE58B71650B46C /* LinkCompass */ = {
 			isa = PBXGroup;
 			children = (
+				9C2C965659A339AF2486D8E5 /* AboutView.swift */,
+				62417969909104B3961B1C82 /* AboutWindowController.swift */,
 				6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */,
 				420432F03204156D3E708288 /* BrowserDetector.swift */,
 				81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */,
@@ -179,7 +195,9 @@
 		6F7F61263D69B578FBC3FB2B /* LinkCompassCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7D6B3C78F2275389598F8B7 /* BrowserRankerTests.swift */,
 				8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */,
+				22189CE8D1353E29C7D30887 /* EventStoreTests.swift */,
 				9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */,
 				B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */,
 				5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */,
@@ -219,7 +237,10 @@
 			children = (
 				DE94B071772EF07E7E9B1676 /* Browser.swift */,
 				0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */,
+				B627815C49F6492A7E5C464D /* BrowserRanker.swift */,
+				23CB7600ADB281508BA0FD18 /* ChoiceEvent.swift */,
 				D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */,
+				09153C4D79486BB533DFF3E5 /* EventStore.swift */,
 				B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */,
 				2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */,
 				76B7C035161B0195A96BC548 /* RuleStore.swift */,
@@ -368,7 +389,10 @@
 			files = (
 				3E9D1B8DA09F5CE60C3797A7 /* Browser.swift in Sources */,
 				A3618F1795F38AE802D97E6F /* BrowserChoiceRule.swift in Sources */,
+				9BCB717585F9494A7BD702D6 /* BrowserRanker.swift in Sources */,
+				CA66FDD210B23032064AA65F /* ChoiceEvent.swift in Sources */,
 				CF6ACDCC394752811191BBB0 /* ChooserSelectionState.swift in Sources */,
+				683BBBCE9B9C1F108DEF92E8 /* EventStore.swift in Sources */,
 				0A5746529F702F30A431AA15 /* IncomingURLContext.swift in Sources */,
 				C3EB8046C850334964341DD9 /* PreferencesStore.swift in Sources */,
 				4D07E42A0AB6CB88820B70C8 /* RuleStore.swift in Sources */,
@@ -388,6 +412,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F42925D781488B754E609F0 /* AboutView.swift in Sources */,
+				48169E5E29462DC2185DA084 /* AboutWindowController.swift in Sources */,
 				99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */,
 				3D37B7C562B8DAC9A3D76DCB /* BrowserDetector.swift in Sources */,
 				34804629C4C714920F10DA87 /* BrowserWindowOpener.swift in Sources */,
@@ -407,7 +433,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				166FB47E03A37C11FC9F5F2D /* BrowserRankerTests.swift in Sources */,
 				343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */,
+				B93A77289CF0BDB272CDF5C9 /* EventStoreTests.swift in Sources */,
 				78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */,
 				D40E501A44A9C10686BF5E5E /* RuleStoreTests.swift in Sources */,
 				851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */,
