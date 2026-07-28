@@ -3,16 +3,26 @@ import Foundation
 public struct RankingContext: Equatable, Sendable {
     public let rememberHost: String?
     public let supportsDomainRules: Bool
+    public let learnedSuggestionBundleIdentifier: String?
 
-    public init(rememberHost: String?, supportsDomainRules: Bool) {
+    public init(
+        rememberHost: String?,
+        supportsDomainRules: Bool,
+        learnedSuggestionBundleIdentifier: String? = nil
+    ) {
         self.rememberHost = rememberHost
         self.supportsDomainRules = supportsDomainRules
+        self.learnedSuggestionBundleIdentifier = learnedSuggestionBundleIdentifier
     }
 
-    public init(incomingURLContext: IncomingURLContext) {
+    public init(
+        incomingURLContext: IncomingURLContext,
+        learnedSuggestionBundleIdentifier: String? = nil
+    ) {
         self.init(
             rememberHost: incomingURLContext.rememberHost,
-            supportsDomainRules: incomingURLContext.supportsDomainRules
+            supportsDomainRules: incomingURLContext.supportsDomainRules,
+            learnedSuggestionBundleIdentifier: learnedSuggestionBundleIdentifier
         )
     }
 }
@@ -21,11 +31,18 @@ public struct RankedBrowser: Equatable, Sendable {
     public let browser: Browser
     public let isPreferred: Bool
     public let isPreferenceBacked: Bool
+    public let isLearnedSuggestion: Bool
 
-    public init(browser: Browser, isPreferred: Bool, isPreferenceBacked: Bool) {
+    public init(
+        browser: Browser,
+        isPreferred: Bool,
+        isPreferenceBacked: Bool,
+        isLearnedSuggestion: Bool = false
+    ) {
         self.browser = browser
         self.isPreferred = isPreferred
         self.isPreferenceBacked = isPreferenceBacked
+        self.isLearnedSuggestion = isLearnedSuggestion
     }
 }
 
@@ -52,14 +69,22 @@ public struct RuleBasedRanker: BrowserRanking {
         preferences: LinkCompassPreferences
     ) -> [RankedBrowser] {
         guard !browsers.isEmpty else { return [] }
-        let preferenceBackedBundleIdentifier = preferredBundleIdentifier(context: context, preferences: preferences)
-        let selectedBundleIdentifier = preferenceBackedBundleIdentifier ?? browsers.first?.bundleIdentifier
+        let explicitBundleIdentifier = context.rememberHost.flatMap { host in
+            domainRuleBrowserBundleIdentifier(forHost: host, preferences: preferences)
+        }
+        let preferenceBackedBundleIdentifier = explicitBundleIdentifier ?? preferences.globalDefaultBrowserBundleIdentifier
+        let learnedBundleIdentifier = explicitBundleIdentifier == nil ? context.learnedSuggestionBundleIdentifier : nil
+        let selectedBundleIdentifier = explicitBundleIdentifier
+            ?? learnedBundleIdentifier
+            ?? preferences.globalDefaultBrowserBundleIdentifier
+            ?? browsers.first?.bundleIdentifier
 
         return browsers.map { browser in
             RankedBrowser(
                 browser: browser,
                 isPreferred: browser.bundleIdentifier == selectedBundleIdentifier,
-                isPreferenceBacked: browser.bundleIdentifier == preferenceBackedBundleIdentifier
+                isPreferenceBacked: browser.bundleIdentifier == preferenceBackedBundleIdentifier,
+                isLearnedSuggestion: browser.bundleIdentifier == learnedBundleIdentifier
             )
         }
     }
@@ -76,15 +101,6 @@ public struct RuleBasedRanker: BrowserRanking {
             return nil
         }
         return browsers.first { $0.bundleIdentifier == bundleIdentifier }
-    }
-
-    private func preferredBundleIdentifier(
-        context: RankingContext,
-        preferences: LinkCompassPreferences
-    ) -> String? {
-        guard let host = context.rememberHost else { return nil }
-        return domainRuleBrowserBundleIdentifier(forHost: host, preferences: preferences)
-            ?? preferences.globalDefaultBrowserBundleIdentifier
     }
 
     private func domainRuleBrowserBundleIdentifier(

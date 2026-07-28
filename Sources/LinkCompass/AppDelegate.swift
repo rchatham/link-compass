@@ -115,8 +115,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        let rankingContext = RankingContext(incomingURLContext: context)
         let preferences = ruleStore.currentPreferences
+        let learnedSuggestionBundleIdentifier = learnedSuggestionBundleIdentifier(
+            for: context,
+            preferences: preferences,
+            installedBrowsers: browsers
+        )
+        let rankingContext = RankingContext(
+            incomingURLContext: context,
+            learnedSuggestionBundleIdentifier: learnedSuggestionBundleIdentifier
+        )
 
         if let browser = ranker.autoOpenBrowser(
             browsers: browsers,
@@ -134,7 +142,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         let initialSelection = rankedBrowsers.first(where: \.isPreferred)?.browser.bundleIdentifier
         let preselectedBundleIdentifier = rankedBrowsers.first { rankedBrowser in
-            rankedBrowser.isPreferred && rankedBrowser.isPreferenceBacked
+            rankedBrowser.isPreferred && (rankedBrowser.isPreferenceBacked || rankedBrowser.isLearnedSuggestion)
         }?.browser.bundleIdentifier
 
         chooserWindowController.show(
@@ -154,6 +162,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             },
             onCancel: {}
         )
+    }
+
+    private func learnedSuggestionBundleIdentifier(
+        for context: IncomingURLContext,
+        preferences: LinkCompassPreferences,
+        installedBrowsers: [Browser]
+    ) -> String? {
+        guard preferences.learningEnabled,
+              let host = context.rememberHost,
+              let events = try? eventStore.events(),
+              let suggestion = ChoiceInsights.suggestion(forHost: host, events: events),
+              installedBrowsers.contains(where: { $0.bundleIdentifier == suggestion.bundleIdentifier }) else {
+            return nil
+        }
+        return suggestion.bundleIdentifier
     }
 
     private func handleChoice(

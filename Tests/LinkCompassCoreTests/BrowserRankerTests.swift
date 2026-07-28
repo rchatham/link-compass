@@ -66,6 +66,68 @@ final class BrowserRankerTests: XCTestCase {
         XCTAssertEqual(preferred?.isPreferenceBacked, true)
     }
 
+    func testLearnedSuggestionIsPreferredWhenNoRuleExists() {
+        let ranker = RuleBasedRanker()
+
+        let ranked = ranker.rankedBrowsers(
+            browsers: [safari, firefox, chrome],
+            context: RankingContext(
+                rememberHost: "example.com",
+                supportsDomainRules: true,
+                learnedSuggestionBundleIdentifier: chrome.bundleIdentifier
+            ),
+            preferences: LinkCompassPreferences()
+        )
+
+        let preferred = ranked.first(where: \.isPreferred)
+        XCTAssertEqual(preferred?.browser.bundleIdentifier, chrome.bundleIdentifier)
+        XCTAssertEqual(preferred?.isPreferenceBacked, false)
+        XCTAssertEqual(preferred?.isLearnedSuggestion, true)
+    }
+
+    func testExplicitRuleBeatsLearnedSuggestion() {
+        let preferences = LinkCompassPreferences(
+            rules: [BrowserChoiceRule(hostPattern: "example.com", browserBundleIdentifier: firefox.bundleIdentifier)]
+        )
+        let ranker = RuleBasedRanker()
+
+        let ranked = ranker.rankedBrowsers(
+            browsers: [safari, firefox, chrome],
+            context: RankingContext(
+                rememberHost: "example.com",
+                supportsDomainRules: true,
+                learnedSuggestionBundleIdentifier: chrome.bundleIdentifier
+            ),
+            preferences: preferences
+        )
+
+        let preferred = ranked.first(where: \.isPreferred)
+        XCTAssertEqual(preferred?.browser.bundleIdentifier, firefox.bundleIdentifier)
+        XCTAssertEqual(preferred?.isPreferenceBacked, true)
+        XCTAssertEqual(preferred?.isLearnedSuggestion, false)
+    }
+
+    func testLearnedSuggestionBeatsGlobalDefault() {
+        let preferences = LinkCompassPreferences(globalDefaultBrowserBundleIdentifier: firefox.bundleIdentifier)
+        let ranker = RuleBasedRanker()
+
+        let ranked = ranker.rankedBrowsers(
+            browsers: [safari, firefox, chrome],
+            context: RankingContext(
+                rememberHost: "example.com",
+                supportsDomainRules: true,
+                learnedSuggestionBundleIdentifier: chrome.bundleIdentifier
+            ),
+            preferences: preferences
+        )
+
+        let preferred = ranked.first(where: \.isPreferred)
+        XCTAssertEqual(preferred?.browser.bundleIdentifier, chrome.bundleIdentifier)
+        XCTAssertEqual(preferred?.isPreferenceBacked, false)
+        XCTAssertEqual(preferred?.isLearnedSuggestion, true)
+        XCTAssertEqual(ranked.first { $0.browser.bundleIdentifier == firefox.bundleIdentifier }?.isPreferenceBacked, true)
+    }
+
     func testAutoOpenRequiresExplicitDomainRuleAndEnabledSetting() {
         let preferences = LinkCompassPreferences(
             autoOpenKnownHosts: true,
