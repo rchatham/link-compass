@@ -9,7 +9,8 @@ let package = Package(
     ],
     products: [
         .library(name: "LinkCompassCore", targets: ["LinkCompassCore"]),
-        .executable(name: "LinkCompass", targets: ["LinkCompass"])
+        .executable(name: "LinkCompass", targets: ["LinkCompass"]),
+        .executable(name: "linkcompass-eval", targets: ["LinkCompassEval"])
     ],
     targets: [
         .target(name: "LinkCompassCore"),
@@ -17,6 +18,10 @@ let package = Package(
             name: "LinkCompass",
             dependencies: ["LinkCompassCore"],
             exclude: ["Resources"]
+        ),
+        .executableTarget(
+            name: "LinkCompassEval",
+            dependencies: ["LinkCompassCore"]
         ),
         .testTarget(
             name: "LinkCompassCoreTests",
