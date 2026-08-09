@@ -1,6 +1,13 @@
 import SwiftUI
 import LinkCompassCore
 
+private struct EvaluationSummary: Sendable {
+    let baselineAccuracy: String
+    let learnedAccuracy: String
+    let accuracyDelta: String
+    let errorDelta: String
+}
+
 struct AboutView: View {
     @StateObject private var viewModel = AboutViewModel()
 
@@ -26,6 +33,21 @@ struct AboutView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 4)
+            }
+
+            GroupBox("Ranking evaluation") {
+                Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 8) {
+                    diagnosticRow("Baseline accuracy", viewModel.baselineAccuracy)
+                    diagnosticRow("Learned accuracy", viewModel.learnedAccuracy)
+                    diagnosticRow("Accuracy delta", viewModel.accuracyDelta)
+                    diagnosticRow("Learned error delta", viewModel.errorDelta)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 4)
+
+                Text("Evaluation replays local choice events causally. Baseline uses an empty-preferences first-browser replay; use deltas for heuristic/ML decisions.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
 
             GroupBox("Detected browsers") {
@@ -61,7 +83,7 @@ struct AboutView: View {
             }
         }
         .padding(20)
-        .frame(width: 640, height: 560)
+        .frame(width: 680, height: 680)
         .onAppear { viewModel.reload() }
     }
 
@@ -85,11 +107,16 @@ final class AboutViewModel: ObservableObject {
     @Published var eventCount = 0
     @Published var preferencesPath = "Unknown"
     @Published var eventsPath = "Unknown"
+    @Published var baselineAccuracy = "Not enough data"
+    @Published var learnedAccuracy = "Not enough data"
+    @Published var accuracyDelta = "Not enough data"
+    @Published var errorDelta = "Not enough data"
     @Published var browsers: [Browser] = []
     @Published var errorMessage: String?
 
     private let browserDetector = BrowserDetector()
     private let defaultBrowserManager = DefaultBrowserManager()
+    private var evaluationTask: Task<Void, Never>?
 
     init() {
         reload()
@@ -111,11 +138,60 @@ final class AboutViewModel: ObservableObject {
 
             let eventStore = try JSONEventStore()
             eventsPath = eventStore.fileURL.path
-            eventCount = try eventStore.load().count
+            let events = try eventStore.load()
+            eventCount = events.count
+            scheduleEvaluationSummary(events: events)
             errorMessage = nil
         } catch {
             errorMessage = "Could not load diagnostics: \(error.localizedDescription)"
         }
+    }
+
+    private func scheduleEvaluationSummary(events: [ChoiceEvent]) {
+        evaluationTask?.cancel()
+        baselineAccuracy = "Calculating…"
+        learnedAccuracy = "Calculating…"
+        accuracyDelta = "Calculating…"
+        errorDelta = "Calculating…"
+
+        evaluationTask = Task { [weak self] in
+            let summary = await Task.detached(priority: .utility) {
+                Self.evaluationSummary(events: events)
+            }.value
+            guard !Task.isCancelled else { return }
+            self?.baselineAccuracy = summary.baselineAccuracy
+            self?.learnedAccuracy = summary.learnedAccuracy
+            self?.accuracyDelta = summary.accuracyDelta
+            self?.errorDelta = summary.errorDelta
+        }
+    }
+
+    nonisolated private static func evaluationSummary(events: [ChoiceEvent]) -> EvaluationSummary {
+        let baseline = RankingEvaluator.evaluate(events: events, mode: .baseline)
+        let learned = RankingEvaluator.evaluate(events: events, mode: .learned)
+        guard baseline.metrics.evaluatedEvents > 0 || learned.metrics.evaluatedEvents > 0 else {
+            return EvaluationSummary(
+                baselineAccuracy: "Not enough data",
+                learnedAccuracy: "Not enough data",
+                accuracyDelta: "Not enough data",
+                errorDelta: "Not enough data"
+            )
+        }
+
+        return EvaluationSummary(
+            baselineAccuracy: formatPercent(baseline.metrics.topOneAccuracy),
+            learnedAccuracy: formatPercent(learned.metrics.topOneAccuracy),
+            accuracyDelta: formatSignedPercent(learned.metrics.topOneAccuracy - baseline.metrics.topOneAccuracy),
+            errorDelta: formatSignedPercent(learned.metrics.topOneErrorRate - baseline.metrics.topOneErrorRate)
+        )
+    }
+
+    nonisolated private static func formatPercent(_ value: Double) -> String {
+        String(format: "%.1f%%", value * 100)
+    }
+
+    nonisolated private static func formatSignedPercent(_ value: Double) -> String {
+        String(format: "%+.1f%%", value * 100)
     }
 
     private static func bundleVersionSummary() -> String {

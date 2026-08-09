@@ -5,24 +5,40 @@ struct LinkCompassEvalCLI {
     let arguments: [String]
 
     func run() throws {
-        guard let eventsPath = value(after: "--events") else {
+        if arguments.contains("--help") || arguments.contains("-h") {
             printUsage()
-            throw CLIError.missingEventsPath
+            return
         }
 
-        let minimumChoices = value(after: "--minimum-choices").flatMap(Int.init) ?? 2
-        let eventsURL = URL(fileURLWithPath: eventsPath)
+        let eventsPath = try value(after: "--events") ?? defaultEventsPath()
+        let minimumChoices = try intValue(after: "--minimum-choices", default: 2)
+        let halfLifeDays = try doubleValue(after: "--half-life-days", default: 30)
+        guard minimumChoices > 0 else { throw CLIError.invalidValue("--minimum-choices must be greater than 0") }
+        guard halfLifeDays > 0 else { throw CLIError.invalidValue("--half-life-days must be greater than 0") }
+
+        let eventsURL = URL(fileURLWithPath: NSString(string: eventsPath).expandingTildeInPath)
         let data = try Data(contentsOf: eventsURL)
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         let events = try decoder.decode([ChoiceEvent].self, from: data)
 
-        let baseline = RankingEvaluator.evaluate(events: events, mode: .baseline, minimumChoices: minimumChoices)
-        let learned = RankingEvaluator.evaluate(events: events, mode: .learned, minimumChoices: minimumChoices)
+        let baseline = RankingEvaluator.evaluate(
+            events: events,
+            mode: .baseline,
+            minimumChoices: minimumChoices,
+            halfLifeDays: halfLifeDays
+        )
+        let learned = RankingEvaluator.evaluate(
+            events: events,
+            mode: .learned,
+            minimumChoices: minimumChoices,
+            halfLifeDays: halfLifeDays
+        )
 
         print("LinkCompass ranking evaluation")
         print("Events: \(eventsURL.path)")
         print("Minimum choices: \(minimumChoices)")
+        print("Half-life days: \(formatNumber(halfLifeDays))")
         print("Baseline: empty-preferences first-browser replay; use deltas for model comparison.")
         print("")
         printReport(baseline)
@@ -30,15 +46,38 @@ struct LinkCompassEvalCLI {
         printDelta(baseline: baseline, learned: learned)
     }
 
-    private func value(after flag: String) -> String? {
+    private func value(after flag: String) throws -> String? {
         guard let index = arguments.firstIndex(of: flag) else { return nil }
         let valueIndex = arguments.index(after: index)
-        guard arguments.indices.contains(valueIndex) else { return nil }
+        guard arguments.indices.contains(valueIndex), !arguments[valueIndex].hasPrefix("--") else {
+            throw CLIError.invalidValue("Missing value for \(flag)")
+        }
         return arguments[valueIndex]
     }
 
+    private func intValue(after flag: String, default defaultValue: Int) throws -> Int {
+        guard let rawValue = try value(after: flag) else { return defaultValue }
+        guard let value = Int(rawValue) else { throw CLIError.invalidValue("\(flag) must be an integer") }
+        return value
+    }
+
+    private func doubleValue(after flag: String, default defaultValue: Double) throws -> Double {
+        guard let rawValue = try value(after: flag) else { return defaultValue }
+        guard let value = Double(rawValue) else { throw CLIError.invalidValue("\(flag) must be a number") }
+        return value
+    }
+
+    private func defaultEventsPath() throws -> String {
+        try JSONEventStore().fileURL.path
+    }
+
     private func printUsage() {
-        print("Usage: linkcompass-eval --events /path/to/choice-events.json [--minimum-choices 2]")
+        print("""
+        Usage: linkcompass-eval [--events /path/to/choice-events.json] [--minimum-choices 2] [--half-life-days 30]
+
+        If --events is omitted, LinkCompass uses the local app event log:
+          ~/Library/Application Support/LinkCompass/choice-events.json
+        """)
     }
 
     private func printReport(_ report: RankingEvaluationReport) {
@@ -67,16 +106,25 @@ struct LinkCompassEvalCLI {
     private func formatSignedPercent(_ value: Double) -> String {
         String(format: "%+.1f%%", value * 100)
     }
+
+    private func formatNumber(_ value: Double) -> String {
+        String(format: "%.1f", value)
+    }
 }
 
-enum CLIError: Error {
-    case missingEventsPath
+enum CLIError: LocalizedError {
+    case invalidValue(String)
+
+    var errorDescription: String? {
+        switch self {
+        case let .invalidValue(message):
+            return message
+        }
+    }
 }
 
 do {
     try LinkCompassEvalCLI(arguments: Array(CommandLine.arguments.dropFirst())).run()
-} catch CLIError.missingEventsPath {
-    exit(64)
 } catch {
     fputs("linkcompass-eval: \(error.localizedDescription)\n", stderr)
     exit(1)
