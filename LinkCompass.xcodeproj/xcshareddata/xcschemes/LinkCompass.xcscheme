@@ -35,6 +35,20 @@
                ReferencedContainer = "container:LinkCompass.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89311526C76106A3A347F189"
+               BuildableName = "LinkCompassNativeHost"
+               BlueprintName = "LinkCompassNativeHost"
+               ReferencedContainer = "container:LinkCompass.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

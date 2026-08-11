@@ -78,6 +78,30 @@ scripts/smoke-test.sh
 - Optional per-domain remember toggle.
 - Optional auto-open for explicit remembered domain rules.
 
+## Chrome/Chromium route reminder prototype
+
+LinkCompass includes an early Chrome/Chromium Native Messaging prototype that can prompt after a forwarded link:
+
+1. LinkCompass records a short-lived pending route with only the normalized host and selected browser metadata.
+2. The Chrome extension checks the local native host when a top-level page finishes loading.
+3. If the page matches a recent LinkCompass handoff, the extension asks whether to remember that host/browser route.
+
+Build and install the local native host manifests:
+
+```bash
+scripts/install-native-host.sh
+```
+
+Then load the unpacked extension from:
+
+```text
+Extensions/Chrome
+```
+
+After Chrome assigns an extension ID, replace `REPLACE_WITH_UNPACKED_EXTENSION_ID` in the generated Native Messaging manifests under each browser's `NativeMessagingHosts` directory, then reload the extension.
+
+Safari support is deferred. Safari Web Extensions need separate Xcode/app-extension packaging and should be added after the Chrome/Chromium native messaging flow is proven.
+
 ## Known limitations
 
 - This is an early MVP scaffold, not a notarized public release build.

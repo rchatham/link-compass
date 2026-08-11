@@ -11,6 +11,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let linkOpener = LinkOpener()
     private let ruleStore: RuleStore
     private let eventStore: EventStore
+    private let pendingRouteStore: PendingRouteStore
     private let ranker = RuleBasedRanker()
     private var openOnboardingObserver: NSObjectProtocol?
     private var openAboutObserver: NSObjectProtocol?
@@ -30,6 +31,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } catch {
             let temporaryURL = FileManager.default.temporaryDirectory.appendingPathComponent("LinkCompass-choice-events.json")
             self.eventStore = EventStore(persistence: try! JSONEventStore(fileURL: temporaryURL))
+        }
+
+        do {
+            self.pendingRouteStore = PendingRouteStore(persistence: try JSONPendingRoutePersistence())
+        } catch {
+            let temporaryURL = FileManager.default.temporaryDirectory.appendingPathComponent("LinkCompass-pending-routes.json")
+            self.pendingRouteStore = PendingRouteStore(persistence: try! JSONPendingRoutePersistence(fileURL: temporaryURL))
         }
         super.init()
     }
@@ -235,7 +243,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 return
             }
 
+            self?.recordPendingRoute(url: url, browser: browser)
             self?.closeLinkCompassWindows()
+        }
+    }
+
+    private func recordPendingRoute(url: URL, browser: Browser) {
+        do {
+            try pendingRouteStore.recordRoute(
+                url: url,
+                browserBundleIdentifier: browser.bundleIdentifier,
+                browserDisplayName: browser.displayName
+            )
+        } catch {
+            showAlert(message: "Could not save pending route", informativeText: error.localizedDescription)
         }
     }
 

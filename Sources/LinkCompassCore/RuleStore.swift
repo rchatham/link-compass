@@ -14,24 +14,27 @@ public final class RuleStore: @unchecked Sendable {
     public var globalDefaultBrowserBundleIdentifier: String? {
         get { preferences.globalDefaultBrowserBundleIdentifier }
         set {
-            preferences.globalDefaultBrowserBundleIdentifier = newValue
-            saveIgnoringErrors()
+            mutateIgnoringErrors {
+                preferences.globalDefaultBrowserBundleIdentifier = newValue
+            }
         }
     }
 
     public var autoOpenKnownHosts: Bool {
         get { preferences.autoOpenKnownHosts }
         set {
-            preferences.autoOpenKnownHosts = newValue
-            saveIgnoringErrors()
+            mutateIgnoringErrors {
+                preferences.autoOpenKnownHosts = newValue
+            }
         }
     }
 
     public var learningEnabled: Bool {
         get { preferences.learningEnabled }
         set {
-            preferences.learningEnabled = newValue
-            saveIgnoringErrors()
+            mutateIgnoringErrors {
+                preferences.learningEnabled = newValue
+            }
         }
     }
 
@@ -47,34 +50,51 @@ public final class RuleStore: @unchecked Sendable {
     }
 
     public func recordChoice(host: String, browserBundleIdentifier: String) throws {
-        let normalized = normalizeStoredHost(host)
-        if let index = preferences.rules.firstIndex(where: { normalizeStoredHost($0.hostPattern) == normalized }) {
-            preferences.rules[index].browserBundleIdentifier = browserBundleIdentifier
-            preferences.rules[index].usageCount += 1
-            preferences.rules[index].updatedAt = Date()
-        } else {
-            preferences.rules.append(
-                BrowserChoiceRule(
-                    hostPattern: normalized,
-                    browserBundleIdentifier: browserBundleIdentifier,
-                    usageCount: 1
+        try mutatePreferences {
+            let normalized = normalizeStoredHost(host)
+            if let index = preferences.rules.firstIndex(where: { normalizeStoredHost($0.hostPattern) == normalized }) {
+                preferences.rules[index].browserBundleIdentifier = browserBundleIdentifier
+                preferences.rules[index].usageCount += 1
+                preferences.rules[index].updatedAt = Date()
+            } else {
+                preferences.rules.append(
+                    BrowserChoiceRule(
+                        hostPattern: normalized,
+                        browserBundleIdentifier: browserBundleIdentifier,
+                        usageCount: 1
+                    )
                 )
-            )
+            }
         }
-        try persistence.save(preferences)
     }
 
     public func deleteRule(id: UUID) throws {
-        preferences.rules.removeAll { $0.id == id }
-        try persistence.save(preferences)
+        try mutatePreferences {
+            preferences.rules.removeAll { $0.id == id }
+        }
     }
 
     public func reload() {
         preferences = (try? persistence.load()) ?? LinkCompassPreferences()
     }
 
-    private func saveIgnoringErrors() {
-        try? persistence.save(preferences)
+    private func mutateIgnoringErrors(_ mutation: () -> Void) {
+        try? mutatePreferences(mutation)
+    }
+
+    private func mutatePreferences(_ mutation: () -> Void) throws {
+        try withPersistenceLock {
+            preferences = try persistence.load()
+            mutation()
+            try persistence.save(preferences)
+        }
+    }
+
+    private func withPersistenceLock<T>(_ body: () throws -> T) throws -> T {
+        if let fileLockingPersistence = persistence as? FileLocking {
+            return try fileLockingPersistence.withExclusiveAccess(body)
+        }
+        return try body()
     }
 
     private func normalizeStoredHost(_ host: String) -> String {

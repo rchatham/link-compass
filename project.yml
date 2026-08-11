@@ -31,6 +31,17 @@ targets:
         INFOPLIST_FILE: Sources/LinkCompass/Resources/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompass
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
+  LinkCompassNativeHost:
+    type: tool
+    platform: macOS
+    sources:
+      - Sources/LinkCompassNativeHost
+    dependencies:
+      - target: LinkCompassCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.reidchatham.LinkCompassNativeHost
+        GENERATE_INFOPLIST_FILE: YES
   LinkCompassCoreTests:
     type: bundle.unit-test
     platform: macOS
@@ -58,6 +69,7 @@ schemes:
     build:
       targets:
         LinkCompass: all
+        LinkCompassNativeHost: all
         LinkCompassCoreTests: [test]
     test:
       targets:
