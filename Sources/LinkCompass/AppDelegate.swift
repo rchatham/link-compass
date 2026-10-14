@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let ruleStore: RuleStore
     private let eventStore: EventStore
     private let pendingRouteStore: PendingRouteStore
+    private lazy var shareRouter = ShareRouter(ruleStore: ruleStore)
     private let ranker = RuleBasedRanker()
     private var openOnboardingObserver: NSObjectProtocol?
     private var openAboutObserver: NSObjectProtocol?
@@ -110,6 +111,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func handleIncomingURL(_ url: URL) {
+        // Custom commands must never fall through to ordinary URL routing.
+        if url.scheme?.lowercased() == "linkcompass" {
+            do {
+                handleShareRequest(try ShareOpenRequest.decode(url))
+            } catch {
+                showAlert(message: "Invalid share request", informativeText: error.localizedDescription)
+            }
+            return
+        }
+
         guard let context = IncomingURLContext(url: url) else {
             showAlert(message: "Unsupported URL", informativeText: url.absoluteString)
             return
@@ -167,6 +178,88 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     remember: remember,
                     preselectedBundleIdentifier: preselectedBundleIdentifier
                 )
+            },
+            onCancel: {}
+        )
+    }
+
+    private func handleShareRequest(_ request: ShareOpenRequest, origin: ShareRequestOrigin = .wire) {
+        let browsers = browserDetector.installedBrowsers()
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            do {
+                ruleStore.reload()
+                let proposedRoute = try ShareRoutingPolicy.route(request, browsers: browsers, preferences: ruleStore.currentPreferences)
+                var consent = ShareRememberConsent.openOnce
+                if ShareConsentPolicy.requiresConfirmation(request, origin: origin),
+                   case .browser(let browser, _) = proposedRoute {
+                    consent = confirmShareRemember(request, browser: browser)
+                }
+                guard let approved = try ShareConsentPolicy.approve(request, origin: origin, consent: consent) else { return }
+                let route = try await shareRouter.open(approved, browsers: browsers) { url, browser in
+                    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+                        self.linkOpener.open(url, in: browser) { error in
+                            if let error {
+                                continuation.resume(throwing: error)
+                            } else {
+                                continuation.resume()
+                            }
+                        }
+                    }
+                }
+                switch route {
+                case .browser:
+                    closeLinkCompassWindows()
+                case .picker:
+                    showSharePicker(for: request, browsers: browsers)
+                }
+            } catch {
+                showAlert(message: "Could not complete share request", informativeText: error.localizedDescription)
+            }
+        }
+    }
+
+    private func confirmShareRemember(_ request: ShareOpenRequest, browser: Browser) -> ShareRememberConsent {
+        guard let host = URLNormalizer.normalizedHost(from: request.url) else { return .cancel }
+        NSApp.activate(ignoringOtherApps: true)
+        let alert = NSAlert()
+        alert.messageText = "Always open \(host) in \(browser.displayName)?"
+        alert.informativeText = "This request came from outside LinkCompass. Remember only if you want to change this site's saved browser."
+        alert.addButton(withTitle: "Open once").keyEquivalent = "\r"
+        alert.addButton(withTitle: "Open & remember")
+        alert.addButton(withTitle: "Cancel").keyEquivalent = "\u{1b}"
+        switch alert.runModal() {
+        case .alertFirstButtonReturn: return .openOnce
+        case .alertSecondButtonReturn: return .openAndRemember
+        default: return .cancel
+        }
+    }
+
+    private func showSharePicker(for request: ShareOpenRequest, browsers: [Browser]) {
+        guard !browsers.isEmpty else {
+            showAlert(message: "No supported browsers found", informativeText: "Install a supported browser to open this shared link.")
+            return
+        }
+        guard let context = IncomingURLContext(url: request.url) else {
+            showAlert(message: "Invalid share request", informativeText: "The shared link has no valid web host.")
+            return
+        }
+        chooserWindowController.show(
+            url: request.url,
+            displayTitle: context.displayTitle,
+            rememberLabel: context.rememberHost,
+            browsers: browsers,
+            initialSelection: nil,
+            onChoose: { [weak self] browser, remember in
+                do {
+                    let choice = try ShareOpenRequest(
+                        url: request.url,
+                        selection: .browser(bundleIdentifier: browser.bundleIdentifier, remember: remember)
+                    )
+                    self?.handleShareRequest(choice, origin: .localPicker)
+                } catch {
+                    self?.showAlert(message: "Invalid share request", informativeText: error.localizedDescription)
+                }
             },
             onCancel: {}
         )

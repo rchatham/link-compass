@@ -35,6 +35,18 @@
             <key>LSHandlerRank</key>
             <string>Owner</string>
         </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>LinkCompass Share Request</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>linkcompass</string>
+            </array>
+            <key>LSHandlerRank</key>
+            <string>Owner</string>
+        </dict>
     </array>
     <key>LSMinimumSystemVersion</key>
     <string>13.0</string>
