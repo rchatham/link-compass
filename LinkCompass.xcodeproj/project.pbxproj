@@ -14,7 +14,12 @@
 		166FB47E03A37C11FC9F5F2D /* BrowserRankerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6B3C78F2275389598F8B7 /* BrowserRankerTests.swift */; };
 		18B0D27238769C0CF36E794A /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472016026DB9F96C82982F4E /* ChooserWindowController.swift */; };
 		1CEEE0DBE65A838D02C92700 /* ChoiceInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECB3759A36404CF5DF7188D /* ChoiceInsightsTests.swift */; };
+		209E0D9FAE56E4A40D3B9C6C /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		24D4951F12F0C925B63F403C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613678E9E1E096950DA7D8FF /* OnboardingView.swift */; };
+		2B6427AD385B8D1165CFB6E9 /* ShareRouterPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EADD058B8DAFAD57DB715 /* ShareRouterPersistenceTests.swift */; };
+		2DEBD7E8E3CEE6C347AE1718 /* ShareConsentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7604068D8C8B6EEDCB1C6A /* ShareConsentPolicy.swift */; };
+		2EB1F0866F1241248B566548 /* ContainingAppHandoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B61C8A89570436B5BD754 /* ContainingAppHandoff.swift */; };
+		2EDE725125517E4C8A29C7CB /* LinkCompassShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BEB6ADD5F2516625BE95F012 /* LinkCompassShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		32947D7EC1C6CA057F8BF86D /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */; };
 		343E0244C1335F18B71CC60F /* ChooserSelectionStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */; };
 		34804629C4C714920F10DA87 /* BrowserWindowOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */; };
@@ -24,11 +29,15 @@
 		3F42925D781488B754E609F0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C965659A339AF2486D8E5 /* AboutView.swift */; };
 		3F590C4C2D526FC623A53649 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA01C01953CB42EC48BA2A /* OnboardingUITests.swift */; };
 		408797A2C9671C6EF25110E4 /* URLNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F72432AE6D9514CA75971B /* URLNormalizer.swift */; };
+		4094D9193C7C69F506B51D9F /* ShareConsentPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732E9E5C69E0E8020F6894D /* ShareConsentPolicyTests.swift */; };
+		427545CDC39AF4AD9CE5278A /* BrowserDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420432F03204156D3E708288 /* BrowserDetector.swift */; };
+		44D16AB99D2271D39B2A4E71 /* WebURLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B3CC68DCF48DEC4769449 /* WebURLValidator.swift */; };
 		48169E5E29462DC2185DA084 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62417969909104B3961B1C82 /* AboutWindowController.swift */; };
 		49DF2D41F8CD1CB36B1A1E1D /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		4D07E42A0AB6CB88820B70C8 /* RuleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7C035161B0195A96BC548 /* RuleStore.swift */; };
 		525A48C31DB7FA00B59CFCBD /* ChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7CF479076989F425F3B16 /* ChooserView.swift */; };
 		53C84D30887D08D5E291A2F4 /* LinkOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */; };
+		59D9AA2840AEBE7B3906BAE7 /* ShareInputLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C471BD072DFA4118B95DB7 /* ShareInputLoader.swift */; };
 		61DB08FAE2A5190D41B872A9 /* RankingEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082358E728F5BA9E9A74C09 /* RankingEvaluatorTests.swift */; };
 		655CD3AF59C810F4D9CB5884 /* NativeHostMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0ACBA32D2C8DCA7144E9410 /* NativeHostMessageHandler.swift */; };
 		683BBBCE9B9C1F108DEF92E8 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09153C4D79486BB533DFF3E5 /* EventStore.swift */; };
@@ -37,20 +46,26 @@
 		78C6DC7A8BADEA838DBD0963 /* IncomingURLContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */; };
 		7F7F45DC02F31E5FE708E032 /* LinkCompassCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; };
 		851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */; };
+		8921CAEF3BB936FE5A6089DD /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A545CD2BB7284FDFF04B32 /* ShareViewController.swift */; };
 		95C5B655712F2E8CC626AD27 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F993FE41FF8CE5F6558E1 /* main.swift */; };
+		99A3A50D6DC35A1E6C09386F /* ShareRoutingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E99253E02A1259D1CCBE42 /* ShareRoutingPolicy.swift */; };
 		99D7896EE3E4823EB8B5A635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */; };
 		9BCB717585F9494A7BD702D6 /* BrowserRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627815C49F6492A7E5C464D /* BrowserRanker.swift */; };
 		9F2DC055BE52DF6392722F6E /* DefaultBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */; };
+		A2BF2BB1CB30EAF7FD9C7C3E /* ShareRoutingPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F456D0394BC71D7C0AD8B /* ShareRoutingPolicyTests.swift */; };
 		A3618F1795F38AE802D97E6F /* BrowserChoiceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */; };
 		A48136D16B77CF3C3087D52D /* ChoiceInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC16975A6E167232DD508193 /* ChoiceInsights.swift */; };
 		AA8B19F665D9ED1B433E1643 /* PendingRouteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B304606983F06C5B158BAA /* PendingRouteStore.swift */; };
 		B93A77289CF0BDB272CDF5C9 /* EventStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22189CE8D1353E29C7D30887 /* EventStoreTests.swift */; };
+		C2125BFD41EF842629E5CBB6 /* WebURLValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75247B5595EC70559760C9CA /* WebURLValidatorTests.swift */; };
 		C3EB8046C850334964341DD9 /* PreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */; };
 		C91A939DD0B8EB9B3A519E27 /* LinkCompassCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA66FDD210B23032064AA65F /* ChoiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB7600ADB281508BA0FD18 /* ChoiceEvent.swift */; };
 		CF6ACDCC394752811191BBB0 /* ChooserSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */; };
+		D10ADF180ECDEFB3236C5014 /* ShareOpenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD5CF2E6484005B4D86D9E7 /* ShareOpenRequest.swift */; };
 		D40E501A44A9C10686BF5E5E /* RuleStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */; };
 		D4804634F67B6AE404FCB862 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */; };
+		D5250618D4966962DC407722 /* ShareOpenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08287A61B7D4B7422987519E /* ShareOpenRequestTests.swift */; };
 		ED18BEF563020D5952DEA8F1 /* LinkCompassCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84A92A913132A7C38C033B /* LinkCompassCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -61,6 +76,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 27B2C86C55C84E4A05B4C0CC;
 			remoteInfo = LinkCompass;
+		};
+		79C4F04B6731DF18E1D4184A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D979924CD90AC5D0B9E8DBD5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B999A5678C9B882C95281ED;
+			remoteInfo = LinkCompassShare;
+		};
+		B1FA3B405F54A643F00D89C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D979924CD90AC5D0B9E8DBD5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A5A9570FA269AD32B85806D;
+			remoteInfo = LinkCompassCore;
 		};
 		BF0480A205F46C1468109C20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -108,9 +137,21 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BC07F0A3040FAA8CA86BE6B3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2EDE725125517E4C8A29C7CB /* LinkCompassShare.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08287A61B7D4B7422987519E /* ShareOpenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOpenRequestTests.swift; sourceTree = "<group>"; };
 		09153C4D79486BB533DFF3E5 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		0ACA2176EFA91435C56BE1AD /* BrowserChoiceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserChoiceRule.swift; sourceTree = "<group>"; };
 		195F993FE41FF8CE5F6558E1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -119,8 +160,10 @@
 		22189CE8D1353E29C7D30887 /* EventStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStoreTests.swift; sourceTree = "<group>"; };
 		23CB7600ADB281508BA0FD18 /* ChoiceEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceEvent.swift; sourceTree = "<group>"; };
 		2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesStore.swift; sourceTree = "<group>"; };
+		353051519DA6A08728B1CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		36F72432AE6D9514CA75971B /* URLNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNormalizer.swift; sourceTree = "<group>"; };
 		3E3863CA782720CAE639C5F1 /* DefaultBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBrowserManager.swift; sourceTree = "<group>"; };
+		3E7604068D8C8B6EEDCB1C6A /* ShareConsentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConsentPolicy.swift; sourceTree = "<group>"; };
 		3FB2AFF82D672A2CCAA0E04F /* NativeHostMessageHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHostMessageHandlerTests.swift; sourceTree = "<group>"; };
 		420432F03204156D3E708288 /* BrowserDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDetector.swift; sourceTree = "<group>"; };
 		472016026DB9F96C82982F4E /* ChooserWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserWindowController.swift; sourceTree = "<group>"; };
@@ -130,33 +173,45 @@
 		53944C8DBAD56A2D58DEDC30 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		613678E9E1E096950DA7D8FF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		62417969909104B3961B1C82 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		64A545CD2BB7284FDFF04B32 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		6A2E59DF07C5E98CE1CF2F9E /* OnboardingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindowController.swift; sourceTree = "<group>"; };
 		6E9EB98D504551FD41DDDA1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EDA01C01953CB42EC48BA2A /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
+		75247B5595EC70559760C9CA /* WebURLValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebURLValidatorTests.swift; sourceTree = "<group>"; };
 		75EC08B4420C697DA23A54C2 /* LinkCompassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCompassApp.swift; sourceTree = "<group>"; };
 		76B7C035161B0195A96BC548 /* RuleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStore.swift; sourceTree = "<group>"; };
+		79C471BD072DFA4118B95DB7 /* ShareInputLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareInputLoader.swift; sourceTree = "<group>"; };
 		7B84A92A913132A7C38C033B /* LinkCompassCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinkCompassCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D05EC8FDEE3A966A3828E51 /* PendingRouteStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRouteStoreTests.swift; sourceTree = "<group>"; };
 		81B2040CE6FA7D92FDFB40E1 /* BrowserWindowOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserWindowOpener.swift; sourceTree = "<group>"; };
+		8732E9E5C69E0E8020F6894D /* ShareConsentPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConsentPolicyTests.swift; sourceTree = "<group>"; };
 		8DC31B38A88B3C4F30615B27 /* ChooserSelectionStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionStateTests.swift; sourceTree = "<group>"; };
 		9309329B0CEEE323089CFC53 /* IncomingURLContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContextTests.swift; sourceTree = "<group>"; };
 		94C425F4E3E92B7003D722F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9BD5CF2E6484005B4D86D9E7 /* ShareOpenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOpenRequest.swift; sourceTree = "<group>"; };
 		9C2C965659A339AF2486D8E5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		A2DEF97B9FB9A963BA66DD29 /* LinkOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOpener.swift; sourceTree = "<group>"; };
 		A7F5207CE9B36B917C01C7A4 /* LinkCompassNativeHost */ = {isa = PBXFileReference; includeInIndex = 0; path = LinkCompassNativeHost; sourceTree = BUILT_PRODUCTS_DIR; };
+		A91F456D0394BC71D7C0AD8B /* ShareRoutingPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRoutingPolicyTests.swift; sourceTree = "<group>"; };
 		AFC2C124FB813B454E4E0B8D /* LinkCompassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkCompassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F67D9425A24AC4FE79A8DD /* IncomingURLContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingURLContext.swift; sourceTree = "<group>"; };
+		B33B3CC68DCF48DEC4769449 /* WebURLValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebURLValidator.swift; sourceTree = "<group>"; };
 		B627815C49F6492A7E5C464D /* BrowserRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserRanker.swift; sourceTree = "<group>"; };
 		B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleStoreTests.swift; sourceTree = "<group>"; };
+		B9E99253E02A1259D1CCBE42 /* ShareRoutingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRoutingPolicy.swift; sourceTree = "<group>"; };
 		BC16975A6E167232DD508193 /* ChoiceInsights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceInsights.swift; sourceTree = "<group>"; };
+		BEB6ADD5F2516625BE95F012 /* LinkCompassShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LinkCompassShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D6B3C78F2275389598F8B7 /* BrowserRankerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserRankerTests.swift; sourceTree = "<group>"; };
 		CCF991C86D494E34DC3F2385 /* LinkCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D356B2419616EEB932E56FD1 /* ChooserSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooserSelectionState.swift; sourceTree = "<group>"; };
 		D5B304606983F06C5B158BAA /* PendingRouteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRouteStore.swift; sourceTree = "<group>"; };
 		DE94B071772EF07E7E9B1676 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		E599E359A56E347A112C1FE4 /* RankingEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingEvaluation.swift; sourceTree = "<group>"; };
+		EC9B61C8A89570436B5BD754 /* ContainingAppHandoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainingAppHandoff.swift; sourceTree = "<group>"; };
 		F0ACBA32D2C8DCA7144E9410 /* NativeHostMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHostMessageHandler.swift; sourceTree = "<group>"; };
+		F44F5D8530162F19501E1D6E /* LinkCompassShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LinkCompassShare.entitlements; sourceTree = "<group>"; };
 		F5FB4B08A3C30B5F63453627 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		FD3EADD058B8DAFAD57DB715 /* ShareRouterPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRouterPersistenceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +220,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				36AC15CA275D2E4A24A2960A /* LinkCompassCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07720AC381B986A14A060247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				209E0D9FAE56E4A40D3B9C6C /* LinkCompassCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +302,12 @@
 				7D05EC8FDEE3A966A3828E51 /* PendingRouteStoreTests.swift */,
 				2082358E728F5BA9E9A74C09 /* RankingEvaluatorTests.swift */,
 				B996F4E0CF32CA532DBAB8F1 /* RuleStoreTests.swift */,
+				8732E9E5C69E0E8020F6894D /* ShareConsentPolicyTests.swift */,
+				08287A61B7D4B7422987519E /* ShareOpenRequestTests.swift */,
+				FD3EADD058B8DAFAD57DB715 /* ShareRouterPersistenceTests.swift */,
+				A91F456D0394BC71D7C0AD8B /* ShareRoutingPolicyTests.swift */,
 				5336B191E91CBE0823C6108E /* URLNormalizerTests.swift */,
+				75247B5595EC70559760C9CA /* WebURLValidatorTests.swift */,
 			);
 			path = LinkCompassCoreTests;
 			sourceTree = "<group>";
@@ -267,6 +335,7 @@
 				7B84A92A913132A7C38C033B /* LinkCompassCore.framework */,
 				486819041245974EA0AE5E34 /* LinkCompassCoreTests.xctest */,
 				A7F5207CE9B36B917C01C7A4 /* LinkCompassNativeHost */,
+				BEB6ADD5F2516625BE95F012 /* LinkCompassShare.appex */,
 				AFC2C124FB813B454E4E0B8D /* LinkCompassUITests.xctest */,
 			);
 			name = Products;
@@ -296,9 +365,33 @@
 				2A7DC7A6A3AE8C78B79E8FC7 /* PreferencesStore.swift */,
 				E599E359A56E347A112C1FE4 /* RankingEvaluation.swift */,
 				76B7C035161B0195A96BC548 /* RuleStore.swift */,
+				3E7604068D8C8B6EEDCB1C6A /* ShareConsentPolicy.swift */,
+				9BD5CF2E6484005B4D86D9E7 /* ShareOpenRequest.swift */,
+				B9E99253E02A1259D1CCBE42 /* ShareRoutingPolicy.swift */,
 				36F72432AE6D9514CA75971B /* URLNormalizer.swift */,
+				B33B3CC68DCF48DEC4769449 /* WebURLValidator.swift */,
 			);
 			path = LinkCompassCore;
+			sourceTree = "<group>";
+		};
+		E895F5558DC92ACFDFC8BB39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				353051519DA6A08728B1CAD6 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F23EF477AA2F5E0480EE6C0B /* LinkCompassShare */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B61C8A89570436B5BD754 /* ContainingAppHandoff.swift */,
+				F44F5D8530162F19501E1D6E /* LinkCompassShare.entitlements */,
+				79C471BD072DFA4118B95DB7 /* ShareInputLoader.swift */,
+				64A545CD2BB7284FDFF04B32 /* ShareViewController.swift */,
+				E895F5558DC92ACFDFC8BB39 /* Resources */,
+			);
+			path = LinkCompassShare;
 			sourceTree = "<group>";
 		};
 		F83A0FE768E5F0D29ECBAF93 /* Sources */ = {
@@ -307,6 +400,7 @@
 				422974A57BEE58B71650B46C /* LinkCompass */,
 				E0DB97B9F75D9A3061A4ABAE /* LinkCompassCore */,
 				D87091F9CB5B80C6C84756FB /* LinkCompassNativeHost */,
+				F23EF477AA2F5E0480EE6C0B /* LinkCompassShare */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -314,6 +408,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0B999A5678C9B882C95281ED /* LinkCompassShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0200DEE30B5201294684738C /* Build configuration list for PBXNativeTarget "LinkCompassShare" */;
+			buildPhases = (
+				02C62C95416CDD52B3D57CA8 /* Sources */,
+				07720AC381B986A14A060247 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68AF283DA50F971B5191D214 /* PBXTargetDependency */,
+			);
+			name = LinkCompassShare;
+			packageProductDependencies = (
+			);
+			productName = LinkCompassShare;
+			productReference = BEB6ADD5F2516625BE95F012 /* LinkCompassShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		1A5A9570FA269AD32B85806D /* LinkCompassCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B4040B6776D40BD60F6D8C /* Build configuration list for PBXNativeTarget "LinkCompassCore" */;
@@ -337,12 +450,14 @@
 			buildPhases = (
 				BF4470484679247A4A1FC05A /* Sources */,
 				066B1FDBC3DB9A3AEC4EAEDA /* Frameworks */,
+				BC07F0A3040FAA8CA86BE6B3 /* Embed Foundation Extensions */,
 				2AA30BC241D3AB6D2D8139FE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				B6FA5B7D39A2F56AA63D3E83 /* PBXTargetDependency */,
+				1CC527ED40E87296335D7FAA /* PBXTargetDependency */,
 			);
 			name = LinkCompass;
 			packageProductDependencies = (
@@ -417,6 +532,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					0B999A5678C9B882C95281ED = {
+						ProvisioningStyle = Automatic;
+					};
 					1A5A9570FA269AD32B85806D = {
 						ProvisioningStyle = Automatic;
 					};
@@ -453,12 +571,24 @@
 				1A5A9570FA269AD32B85806D /* LinkCompassCore */,
 				ED5ABD67D9B37098B4BCAAA2 /* LinkCompassCoreTests */,
 				89311526C76106A3A347F189 /* LinkCompassNativeHost */,
+				0B999A5678C9B882C95281ED /* LinkCompassShare */,
 				2C75DD388784ED6E60EC7729 /* LinkCompassUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		02C62C95416CDD52B3D57CA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				427545CDC39AF4AD9CE5278A /* BrowserDetector.swift in Sources */,
+				2EB1F0866F1241248B566548 /* ContainingAppHandoff.swift in Sources */,
+				59D9AA2840AEBE7B3906BAE7 /* ShareInputLoader.swift in Sources */,
+				8921CAEF3BB936FE5A6089DD /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		56EBCE598929FC8DE794BABF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,7 +606,11 @@
 				C3EB8046C850334964341DD9 /* PreferencesStore.swift in Sources */,
 				03819E03F0FFB062F2802642 /* RankingEvaluation.swift in Sources */,
 				4D07E42A0AB6CB88820B70C8 /* RuleStore.swift in Sources */,
+				2DEBD7E8E3CEE6C347AE1718 /* ShareConsentPolicy.swift in Sources */,
+				D10ADF180ECDEFB3236C5014 /* ShareOpenRequest.swift in Sources */,
+				99A3A50D6DC35A1E6C09386F /* ShareRoutingPolicy.swift in Sources */,
 				408797A2C9671C6EF25110E4 /* URLNormalizer.swift in Sources */,
+				44D16AB99D2271D39B2A4E71 /* WebURLValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +664,12 @@
 				0F474C69A269AF2EE391F332 /* PendingRouteStoreTests.swift in Sources */,
 				61DB08FAE2A5190D41B872A9 /* RankingEvaluatorTests.swift in Sources */,
 				D40E501A44A9C10686BF5E5E /* RuleStoreTests.swift in Sources */,
+				4094D9193C7C69F506B51D9F /* ShareConsentPolicyTests.swift in Sources */,
+				D5250618D4966962DC407722 /* ShareOpenRequestTests.swift in Sources */,
+				2B6427AD385B8D1165CFB6E9 /* ShareRouterPersistenceTests.swift in Sources */,
+				A2BF2BB1CB30EAF7FD9C7C3E /* ShareRoutingPolicyTests.swift in Sources */,
 				851E50808D30D18B93956CD5 /* URLNormalizerTests.swift in Sources */,
+				C2125BFD41EF842629E5CBB6 /* WebURLValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +680,16 @@
 			isa = PBXTargetDependency;
 			target = 1A5A9570FA269AD32B85806D /* LinkCompassCore */;
 			targetProxy = BF0480A205F46C1468109C20 /* PBXContainerItemProxy */;
+		};
+		1CC527ED40E87296335D7FAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B999A5678C9B882C95281ED /* LinkCompassShare */;
+			targetProxy = 79C4F04B6731DF18E1D4184A /* PBXContainerItemProxy */;
+		};
+		68AF283DA50F971B5191D214 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A5A9570FA269AD32B85806D /* LinkCompassCore */;
+			targetProxy = B1FA3B405F54A643F00D89C2 /* PBXContainerItemProxy */;
 		};
 		B6FA5B7D39A2F56AA63D3E83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -645,6 +794,25 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		167D5BD614C9D4D01644C27C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/LinkCompassShare/LinkCompassShare.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				INFOPLIST_FILE = Sources/LinkCompassShare/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.reidchatham.LinkCompass.Share;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -778,6 +946,7 @@
 		76E8FC8E49FFD2A46219F447 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -801,6 +970,7 @@
 		9B176BB7B7EB53C6F70FD85F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -820,6 +990,25 @@
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
+		};
+		C587F3BD5EC43341F7803478 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/LinkCompassShare/LinkCompassShare.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				INFOPLIST_FILE = Sources/LinkCompassShare/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.reidchatham.LinkCompass.Share;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
 		};
 		D906775C29A5EE54329DF137 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -859,6 +1048,15 @@
 			buildConfigurations = (
 				76E8FC8E49FFD2A46219F447 /* Debug */,
 				9B176BB7B7EB53C6F70FD85F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		0200DEE30B5201294684738C /* Build configuration list for PBXNativeTarget "LinkCompassShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C587F3BD5EC43341F7803478 /* Debug */,
+				167D5BD614C9D4D01644C27C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

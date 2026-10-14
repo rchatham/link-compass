@@ -4,53 +4,31 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_NAME="LinkCompass"
 INSTALL_DIR="${INSTALL_DIR:-/Applications}"
-DERIVED_DATA="$ROOT_DIR/build/XcodeDerivedData"
-CONFIGURATION="${CONFIGURATION:-Release}"
-SIGN_IDENTITY="${SIGN_IDENTITY:--}"
+BUILD_DIR="${BUILD_DIR:-$ROOT_DIR/build}"
+LAUNCH_APP="${LAUNCH_APP:-0}"
 TARGET_APP="$INSTALL_DIR/$APP_NAME.app"
-BUILT_APP="$DERIVED_DATA/Build/Products/$CONFIGURATION/$APP_NAME.app"
+BUILT_APP="$BUILD_DIR/$APP_NAME.app"
 LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 
-cd "$ROOT_DIR"
-
-if command -v xcodegen >/dev/null 2>&1; then
-  xcodegen generate
-fi
-
-xcodebuild \
-  -project "$ROOT_DIR/LinkCompass.xcodeproj" \
-  -scheme "$APP_NAME" \
-  -configuration "$CONFIGURATION" \
-  -derivedDataPath "$DERIVED_DATA" \
-  -destination 'platform=macOS,arch=arm64' \
-  CODE_SIGNING_ALLOWED=NO \
-  build
-
-if [[ ! -d "$BUILT_APP" ]]; then
-  echo "Expected built app at $BUILT_APP" >&2
+# Xcode may register its derived product while building; this script explicitly
+# installs and registers the complete packaged app.
+BUILD_DIR="$BUILD_DIR" "$ROOT_DIR/scripts/make-app.sh"
+if [[ "$TARGET_APP" == "$BUILT_APP" ]]; then
+  echo "INSTALL_DIR must be different from BUILD_DIR." >&2
   exit 1
 fi
-
-pkill -x "$APP_NAME" 2>/dev/null || true
+if pgrep -x "$APP_NAME" >/dev/null; then
+  pkill -x "$APP_NAME"
+fi
 mkdir -p "$INSTALL_DIR"
 rm -rf "$TARGET_APP"
 ditto "$BUILT_APP" "$TARGET_APP"
-if [[ "$SIGN_IDENTITY" == "-" ]]; then
-  codesign --force --deep --sign - "$TARGET_APP"
-else
-  codesign --force --deep --options runtime --sign "$SIGN_IDENTITY" "$TARGET_APP"
-fi
+codesign --verify --deep --strict --verbose=2 "$TARGET_APP"
 "$LSREGISTER" -f -R "$TARGET_APP"
-
-open -R "$TARGET_APP"
-open "$TARGET_APP"
-
-echo "Installed, registered, and launched $TARGET_APP"
-echo "Signing details:"
-codesign -dv "$TARGET_APP" 2>&1 | sed 's/^/  /'
-echo "Gatekeeper assessment:"
-spctl --assess --type execute -vv "$TARGET_APP" 2>&1 | sed 's/^/  /' || true
-if [[ "$SIGN_IDENTITY" == "-" ]]; then
-  echo "Installed with ad-hoc signing. For public distribution, set SIGN_IDENTITY to a Developer ID identity and notarize the app."
+if [[ "$LAUNCH_APP" == "1" ]]; then
+  open "$TARGET_APP"
 fi
-echo "If System Settings still does not list LinkCompass, use the app's Set Automatically button or log out/in to refresh Launch Services UI caches."
+
+echo "Installed and registered $TARGET_APP (including its Share extension)."
+echo "Open LinkCompass, then enable it in macOS Share extensions settings if it is not in the Share menu."
+echo "Use LAUNCH_APP=1 to launch after installation. Ad-hoc builds are for local development only."
